@@ -1,0 +1,77 @@
+<nav class="navbar navbar-expand-xl bg-color8 sticky noqII">
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="navbar-brand" >
+                <img src="{{ url_for('static', filename='LottoTryLogo.png') }}" class="img-fluid" alt="Lottotry Logo" width="50%" />
+            </a>
+        </li>
+        <li class="nav-item">
+            <div class="mt-2 margin-left margin-right fw-bold">     
+              <form id='myForm' action="/update-content" mothod="post"> 
+                <!--<select id="lotto_id"  class="dropdown btn bg-color8 my-color-1 dropdown-toggle  fw-bold"> -->
+                <!-- <select id="lotto_id" name="lotto_name" onchange="this.form.submit()"> -->
+                <select id="lotto_id" name="lotto_name" >
+                    <option value="1">BC49</option>
+                    <option value="2">Lotto649</option>
+                    <option value="3">LottoMax</option>
+                    <option value="4">DailyGrand</option>
+                    <option value="5">DailyGrand_GrandNumber</option>
+                </select>
+                
+              </form>
+            </div>
+        </li>
+        <li class="nav-item">
+            <div class="mt-2 margin-left margin-right fw-bold">
+                <select id="sort_id" class="dropdown btn bg-color8 my-color-1 dropdown-toggle  fw-bold" onChange={(e)=>                   
+                    <option value="1">Number</option>
+                    <option value="2">Distance</option>
+                    <option value="3">Total Hits</option>
+                    <option value="4">Lotto Draws</option>
+                    <option value="5">Number Draws</option>
+                    <option value="6">Predict Draws</option>
+                    ))}
+                </select>
+            </div>
+        </li>
+       
+
+    </ul>
+</nav>
+
+<script>
+   
+
+    function selectLotto(value) {
+        //console.log(value)
+        setLottoName(value)
+
+
+        switch (value) {
+            case "BC49":
+                setNumberRange(49)
+                return setLottoColumns(7)
+
+            case "Lotto649":
+                setNumberRange(49)
+                return setLottoColumns(7)
+
+            case "LottoMax":
+                setNumberRange(50)
+                return setLottoColumns(8)
+
+            case "DailyGrand":
+                setNumberRange(49)
+                return setLottoColumns(5)
+
+
+            case "DailyGrand_GrandNumber":
+                setNumberRange(7)
+                return setLottoColumns(1)
+
+            default: return setLottoColumns(7)
+        }
+    }
+
+
+</script>
