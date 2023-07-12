@@ -13,11 +13,12 @@
   
       <tbody>     
         <div >
+
           {% for i in range(lotto['draw_numbers_count']) %}
           <tr>             
-              <td>{{lotto['draw_numbers'][i]}}</td>
+              <td>{{lotto['draw_numbers'][0]}}</td>
               <td class="my-color-2 bg-greenyellow">{{lotto['draw_date'][i]}}</td>
-              
+
               {% for number in lotto['numbers'][i]%}                
               <td> {{number['value'], number['distance'],  number['totalHits']}} </td>         
               {% endfor %}  

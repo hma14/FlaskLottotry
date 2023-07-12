@@ -7,7 +7,7 @@ app = Flask(__name__, static_url_path='/static')
 
 lotto_name = '1'
 sort_name = '1'
-numbers = []
+
 
 lotto_name_dict = {
   1: 'BC49',
@@ -20,7 +20,6 @@ sort_name_dict = {
   1: 'value',
   2: 'distance',
   3: 'totalHits',
-  
 }
 
 
@@ -40,14 +39,14 @@ def sort_numbers(lists, p1, p2):
 
 
 def load_lotto_data(lotto_name):
+  print(f"lotto_name = {lotto_name}")
   url = f'http://api.lottotry.com/api/lottotypes?lottoName={lotto_name}'
 
   # Make a GET request
   response = requests.get(url)
   if response.status_code == 200:
-    global data
     data = response.json()  # Parse the response as JSON
-    #print(data)
+    #print(data[0])
   else:
     print('Request failed with status code:', response.status_code)
 
@@ -58,7 +57,7 @@ def load_lotto_data(lotto_name):
 
   draw_numbers = []
   draw_date = []
-  global numbers
+  numbers = []
   values_list = []
 
   for da in data:
@@ -113,7 +112,7 @@ def update_content():
   if request.method == "POST":
     global lotto_name
     lotto_name = request.form['lotto_name']
-    print(lotto_name)
+
     global lotto
     lotto = load_lotto_data(lotto_name)
 
@@ -125,8 +124,8 @@ def sort_by():
   if request.method == "POST":
     global sort_name
     sort_name = request.form['sort_name']
-    
-    sort_numbers(numbers, sort_name_dict[int(sort_name)], 'value')
+
+    #sort_numbers(numbers, sort_name_dict[int(sort_name)], 'value')
 
     global lotto
     lotto = load_lotto_data(lotto_name)
