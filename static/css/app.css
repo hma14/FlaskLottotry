@@ -163,6 +163,11 @@ thead {
   color: rgba(245, 9, 88, 0.616);
 }
 
+.my-color-4 {
+  color: rgb(242, 7, 90) !important;
+}
+
+
 .bg-greenyellow {
 
   background-color: rgb(240, 222, 164) !important;
@@ -264,10 +269,10 @@ thead {
   background-color: rgb(193, 233, 193) !important;
 }
 
-.bg-color25 {
-  background-color: rgb(181, 233, 157) !important;
-}
 
+.bg-color26 {
+  background-color: rgb(223, 32, 70) !important;
+}
 .sticky {
   position: sticky;
   top: 0;
@@ -287,3 +292,4 @@ thead {
   outline: none;
   box-shadow: none;
 }
+

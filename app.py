@@ -6,6 +6,22 @@ import json
 app = Flask(__name__, static_url_path='/static')
 
 lotto_name = '1'
+sort_name = '1'
+numbers = []
+
+lotto_name_dict = {
+  1: 'BC49',
+  2: 'Lotto 649',
+  3: 'Lotto Max',
+  4: 'Daily Grand',
+  5: 'Daily Grand Number'
+}
+sort_name_dict = {
+  1: 'value',
+  2: 'distance',
+  3: 'totalHits',
+  
+}
 
 
 @app.route('/select-lotto', methods=['POST'])
@@ -42,7 +58,7 @@ def load_lotto_data(lotto_name):
 
   draw_numbers = []
   draw_date = []
-  numbers = []
+  global numbers
   values_list = []
 
   for da in data:
@@ -62,7 +78,7 @@ def load_lotto_data(lotto_name):
     values_list.append(values)
 
   #sorted_list = sort_numbers(numbers, 'distance', 'value')
-  sorted_list = sort_numbers(numbers, 'value', 'value')
+  sorted_list = sort_numbers(numbers, sort_name_dict[int(sort_name)], 'value')
   #print(sorted_list)
 
   draw_numbers_count = len(draw_numbers)
@@ -85,24 +101,36 @@ lotto = load_lotto_data(lotto_name)
 def home():
 
   #print(lotto)
-  return render_template('home.html', lotto=lotto)
+  print(sort_name_dict[int(sort_name)])
+  return render_template('home.html',
+                         lotto=lotto,
+                         lottoName=lotto_name_dict[int(lotto_name)],
+                         sortBy=sort_name_dict[int(sort_name)])
 
 
 @app.route('/update-content', methods=['GET', 'POST'])
 def update_content():
   if request.method == "POST":
+    global lotto_name
     lotto_name = request.form['lotto_name']
     print(lotto_name)
     global lotto
     lotto = load_lotto_data(lotto_name)
 
   return home()
-  
 
 
-@app.route('/static/css/<path:filename>')
-def serve_css(filename):
-  return send_from_directory(app.static_folder + '/css', filename)
+@app.route('/sort_by', methods=['GET', 'POST'])
+def sort_by():
+  if request.method == "POST":
+    global sort_name
+    sort_name = request.form['sort_name']
+    
+    sort_numbers(numbers, sort_name_dict[int(sort_name)], 'value')
+
+    global lotto
+    lotto = load_lotto_data(lotto_name)
+  return home()
 
 
 app.run(host='0.0.0.0', port=8001, debug=True)

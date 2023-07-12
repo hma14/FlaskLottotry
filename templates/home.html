@@ -38,9 +38,10 @@
                 type: 'POST',
                 data: {'lotto_name': selectedValue},
                 success: function (response) {
-                    console.log(response)
-                    $('#content').html(response.content);
+                    console.log(response.content)
+                    $('#content').html(response.content);                    
                     location.reload();
+                    
                 },
                 fail: function(jqXHR, textStatus, errorThrown) {
                   // Code to handle failed response
@@ -49,6 +50,31 @@
                 }
                 
             });
+          $('#lotto').text(selectedValue);
+        });
+    });
+  
+    $(document).ready(function () {
+        $('#sort_id').change(function () {
+            var selectedValue = $(this).val();
+            $.ajax({                
+                //url: '/update-content?lotto_name=' + selectedValue,   
+                url: '/sort_by',
+                type: 'POST',
+                data: {'sort_name': selectedValue},
+                success: function (response) {
+                    //console.log(response.content)
+                    $('#content').html(response.content);                    
+                    location.reload();                    
+                },
+                fail: function(jqXHR, textStatus, errorThrown) {
+                  // Code to handle failed response
+                  console.log('AJAX request failed: ' + textStatus);
+                  console.log('Error thrown: ' + errorThrown);
+                }
+                
+            });
+          $('#lotto').text(selectedValue);
         });
     });
 

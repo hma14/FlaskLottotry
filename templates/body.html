@@ -3,8 +3,8 @@
     <table class="table table-striped table-hover table-bordered" >
       <thead class="table-success text-center">
           <tr>
-              <th class="text-light bg-info">Draw Number</th>
-              <th class="text-light bg-info">Draw Date</th>
+              <th class="text-light bg-info">Draw</th>
+              <th class="text-light bg-info">Date</th>
               {% for num in range(1, lotto['number_range']+1) %}
               <th class="text-warning bg-success">{{num}}</th>
               {% endfor %}        
@@ -19,7 +19,7 @@
               <td class="my-color-2 bg-greenyellow">{{lotto['draw_date'][i]}}</td>
               
               {% for number in lotto['numbers'][i]%}                
-              <td> {{number['value'], number['distance'], number['numberofDrawsWhenHit'], number['totalHits']}} </td>         
+              <td> {{number['value'], number['distance'],  number['totalHits']}} </td>         
               {% endfor %}  
           </tr>
           {% endfor %}
